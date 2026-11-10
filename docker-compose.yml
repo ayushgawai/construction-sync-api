@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: { POSTGRES_DB: sync, POSTGRES_USER: sync, POSTGRES_PASSWORD: sync }
+    ports: ["5432:5432"]
+    volumes: ["pg:/var/lib/postgresql/data", "./sql/schema.sql:/docker-entrypoint-initdb.d/01.sql:ro"]
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+volumes: { pg: {} }
